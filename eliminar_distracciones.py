@@ -1,6 +1,7 @@
 import time
 from datetime import datetime as dt
 import sys, traceback, os
+from tkinter import *
 
 hosts_path = r"C:\Windows\System32\drivers\etc\hosts"
 redirrecionar = "127.0.0.1"
@@ -13,7 +14,6 @@ def texto_lista(archivo_txt):
         linea = linea.replace("\n", "")
         lista.append(linea)
     return lista
-# remplazar por .readlines()
     
 
 # Recuerda: agregar extension a nombre del proceso
@@ -24,9 +24,11 @@ def matar_proceso(nombre_del_proceso):
         asesinado = 0
     return asesinado
     
+# Consigue las paginas y apps por bloquear
 paginas_lista = texto_lista("bloquear_paginas.txt")
 apps_lista = texto_lista("bloquear_apps.txt")
 
+# Bloquea paginas y cierra apps
 def activar():
     with open(hosts_path, "r+") as archivo:
         contenido = archivo.read()
@@ -38,6 +40,7 @@ def activar():
     for app in apps_lista:
         matar_proceso(app)
 
+# Desbloquea paginas
 def desactivar():
     with open(hosts_path, "r+") as archivo:
         contenido = archivo.readlines()
@@ -46,14 +49,24 @@ def desactivar():
             if not any(pagina in linea for pagina in paginas_lista):
                archivo.write(linea) 
         archivo.truncate()
-print("--------------------")
-print("----MadreNodriza----")
-print("--------------------\n")
-while(True):
-    opcion = input("0: Desactivar     1: Activar\n")
-    if(opcion == "0"):
-        desactivar()
-    if(opcion == "1"):
+
+# GUI control
+def boton_control():
+    if b1["text"] == "Activar":
         activar()
-    time.sleep(1)
+        b1["text"] = "Desactivar"
+    else:
+        desactivar()
+        b1["text"] = "Activar"
+# GUI
+ventana = Tk()
+ventana.geometry("200x200")
+
+
+b1 = Button(text = "Activar", height= 3, width = 10, fg="white", bg="grey", command = boton_control)
+b1.place(relx=0.5, rely=0.5, anchor=CENTER)
+
+
+
+ventana.mainloop()
 
