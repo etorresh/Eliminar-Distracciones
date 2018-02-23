@@ -60,9 +60,12 @@ def boton_control():
         b1["text"] = "Activar"
 # GUI
 ventana = Tk()
-ventana.geometry("200x200")
+ventana.geometry("75x75")
 
-b1 = Button(text = "Activar", height= 3, width = 10, fg="white", bg="grey", command = boton_control)
+
+b1 = Button(text = "Activar", height= 2, width = 8, fg="white", bg="grey", command = boton_control)
 b1.place(relx=0.5, rely=0.5, anchor=CENTER)
+
+
 
 ventana.mainloop()
