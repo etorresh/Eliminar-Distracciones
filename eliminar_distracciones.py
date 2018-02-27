@@ -24,8 +24,8 @@ def matar_proceso(nombre_del_proceso):
     aseinado = subprocess.run("taskkill /im " + nombre_del_proceso + " /f", stdout=subprocess.PIPE, stderr = subprocess.PIPE)
     
 # Consigue las paginas y apps por bloquear
-paginas_lista = texto_lista("D:/Python/EliminarDistracciones/bloquear_paginas.txt")
-apps_lista = texto_lista("D:/Python/EliminarDistracciones/bloquear_apps.txt")
+paginas_lista = texto_lista("bloquear_paginas.txt")
+apps_lista = texto_lista("bloquear_apps.txt")
 
 # Bloquea paginas y cierra apps
 def activar():
